@@ -1,7 +1,8 @@
-package zzeutil
+package utils
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -35,4 +36,14 @@ func PathExists(path string) bool {
 		return false
 	}
 	return false
+}
+
+func ReadAllFile(path string) (result string, err error) {
+	content, err := ioutil.ReadFile("./20200920-reflect-ini/test/test.ini")
+	if err != nil {
+		fmt.Println("read file failed, err:", err)
+		return
+	}
+	result = string(content)
+	return
 }

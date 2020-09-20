@@ -2,7 +2,7 @@ package zlogger
 
 import (
 	"fmt"
-	"testProject/20200918/zzeutil"
+	"testProject/utils"
 	"time"
 )
 
@@ -30,28 +30,28 @@ func (c *ConsoleLogger) log(logLevel LogLevel, format string, params ...interfac
 	msg := fmt.Sprintf(format, params...)
 	nowStr := time.Now().Format("2006-01-02 15:04:05")
 	var levelStr string
-	var fontColor zzeutil.FontColor
+	var fontColor utils.FontColor
 	switch logLevel {
 	case Debug:
 		levelStr = "DEBUG"
-		fontColor = zzeutil.Black
+		fontColor = utils.Black
 	case Trace:
 		levelStr = "TRACE"
-		fontColor = zzeutil.White
+		fontColor = utils.White
 	case Info:
 		levelStr = "INFO"
-		fontColor = zzeutil.Blue
+		fontColor = utils.Blue
 	case Warn:
 		levelStr = "WARN"
-		fontColor = zzeutil.Yellow
+		fontColor = utils.Yellow
 	case Error:
 		levelStr = "ERROR"
-		fontColor = zzeutil.Red
+		fontColor = utils.Red
 	}
 	filePath, funcName, line := getRuntimeInfo()
 	//fileName := filepath.Base(filePath)
 	msg = formatLogMsg(levelStr, funcName, filePath, nowStr, msg, line)
-	zzeutil.ColorPrint(fontColor, msg)
+	utils.ColorPrint(fontColor, msg)
 }
 
 //Debug ...

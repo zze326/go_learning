@@ -5,7 +5,7 @@ import (
 	"os"
 	"path"
 	"strconv"
-	"testProject/20200918/zzeutil"
+	"testProject/utils"
 	"time"
 )
 
@@ -51,7 +51,7 @@ func (f *FileLogger) initFile() error {
 	logFilePath := path.Join(f.logDir, f.logFileName) + ".log"
 	errLogFilePath := path.Join(f.logDir, f.logFileName) + ".err"
 
-	if !zzeutil.PathExists(f.logDir) {
+	if !utils.PathExists(f.logDir) {
 		err := os.MkdirAll(f.logDir, os.ModePerm)
 		if err != nil {
 			panic(fmt.Errorf("create log dir failed, err: %v", err))
@@ -74,10 +74,10 @@ func (f *FileLogger) initFile() error {
 }
 
 func (f *FileLogger) GetLogFile(filePath string) (file *os.File, err error) {
-	currentSize := zzeutil.GetFileSize(filePath)
-	maxSize := zzeutil.BytesToMB(f.maxFileSize)
+	currentSize := utils.GetFileSize(filePath)
+	maxSize := utils.BytesToMB(f.maxFileSize)
 	if currentSize >= f.maxFileSize {
-		newFilePath := filePath + zzeutil.NowStr("") + "." + strconv.FormatFloat(maxSize, 'f', 2, 64) + "mb"
+		newFilePath := filePath + utils.NowStr("") + "." + strconv.FormatFloat(maxSize, 'f', 2, 64) + "mb"
 		err = os.Rename(filePath, newFilePath)
 		if err != nil {
 			fmt.Printf("rename old log file failed, err: %v", err)

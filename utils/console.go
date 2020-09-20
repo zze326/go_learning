@@ -1,4 +1,4 @@
-package zzeutil
+package utils
 
 import (
 	"fmt"
